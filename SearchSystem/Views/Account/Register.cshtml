@@ -1,0 +1,53 @@
+﻿@model SearchSystem.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h3 style="color:orange">Регистрация: Стъпка 1</h3>
+    <h4>Създайте нов акаунт.</h4>
+    <hr />
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AuthorizationKey, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.AuthorizationKey, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Създай акаунт" />
+        </div>
+        <div style="padding:20px; margin-top:30px;"
+             class="col-md-12">
+            <p>За да вземете своя <strong>Authorization Key</strong> като преподавател за да можете да се регистрирате в системата,
+            моля пишете ми в <a href="https://www.linkedin.com/in/trifondardzhonov" target="_blank">LinkedIn</a> или на <i>trifon.dardzhonov@gmail.com</i>.</p>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

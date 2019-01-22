@@ -1,0 +1,15 @@
+﻿@model IList<SearchSystem.Entities.Keyword>
+
+@Styles.Render("~/Content/UniversitySystem.css")
+
+@using (Html.BeginForm("EditThesisKeywords", "ProfessorProfile", FormMethod.Post))
+{
+    @Html.Hidden("thesisId",(int)@ViewBag.ThesisId)
+    @Html.Hidden("professorId",(int)@ViewBag.ProfessorId)
+    
+    <div id="in-center">
+        @Html.Partial("~/Views/Shared/_KeywordsPartial.cshtml", Model)
+
+        <input type="submit" value="Добави" class="btn btn-info" />
+    </div>
+}

@@ -1,0 +1,63 @@
+﻿<!--Use in Search->ShowKeywords, ProfessorProfile->CreateThesis, CustomRegistration->RegisterProfessor-->
+<!--Use in ProfessorProfile->EditProfessorKeywords, ProfessorProfile->EditThesisKeywords-->
+@model IList<SearchSystem.Entities.Keyword>
+@Styles.Render("~/Content/UniversitySystem.css")
+@Scripts.Render("~/bundles/jquery")
+
+@{int InRow = Model.Count() / 3;}
+<div>
+    <h3 style="color:orange">Моля изберете ключови думи</h3>
+    <div class="keywords-row">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            bool renderRow = i == InRow || i == (2 * InRow) ? true : false;
+
+            if (renderRow)
+            {
+                @:</div>
+                @:<div class="keywords-row">
+            }
+
+            <input type="checkbox" id="@Model[i].KeywordId" name="checkboxList" value="@Model[i].KeywordId" class="chkbox">
+            <label style="height:40px; width:250px;" for="@Model[i].KeywordId" @{if (i % 2 == 0) { <text> class="odd" </text>   }}> 
+            
+                @if (Model[i].Field.ParentField == null)
+                {
+                    <span class="glyphicon glyphicon-chevron-down"></span> @Model[i].Value
+                }
+
+                else {@Model[i].Value  }
+
+            </label>
+        }
+   </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".chkbox").click(function () {
+            if ($(this).is(":checked")) {
+                $('label[for=' + $(this).val() + ']').addClass("checked");
+            }
+            else {
+                $('label[for=' + $(this).val() + ']').removeClass("checked");
+            }
+        });
+    });
+</script>
+
+@if(@ViewBag.SelectedKeywords != null){
+    <!--This is selected keywords-->
+    foreach (var keywordId in (IEnumerable<int>)@ViewBag.SelectedKeywords)
+    {
+        <p class="hidden">@keywordId</p>
+    }
+    <!--We make keywords who already have: checked-->
+    <script>
+        $(".hidden").each(function (index, element) {
+            var el = $(element);
+            $('label[for=' + el.html() + ']').trigger("click").addClass("checked");
+        });
+    </script>
+}

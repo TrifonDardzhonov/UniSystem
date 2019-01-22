@@ -1,0 +1,33 @@
+﻿@model  IList<SearchSystem.Entities.Keyword>
+@Styles.Render("~/Content/UniversitySystem.css")
+
+<div id="in-center">
+    <h3>Ключови думи за катедра: @ViewBag.departmentName</h3>
+
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <h5 class="col-md-12">Допълнителен филтър при търсене на дипломни теми</h5>
+                <div class="col-md-4">
+                    <h4>Тип</h4>
+                    @Html.DropDownList("type", new SelectList(new[] { "Всички", "Бакалавър", "Магистър" }), new { @class = "form-control col-md-12" })
+                </div>
+                <div class="col-md-4">
+                    <h4>Сложност</h4>
+                    @Html.DropDownList("complexity", new SelectList(new[] { "Всички", "Средна", "Висока" }), new { @class = "form-control col-md-12" })
+                </div>
+                <div class="col-md-4">
+                    <h4>Статус</h4>
+                    @Html.DropDownList("status", new SelectList(new[] { "Всички", "Свободна", "Заета", "Защитена" }), new { @class = "form-control col-md-12" })
+                </div>
+            </div>
+            
+            <input type="hidden" name="departmentName" value="@ViewBag.departmentName" />
+
+            @Html.Partial("~/Views/Shared/_KeywordsPartial.cshtml", Model)
+
+            <input type="submit" value="Търси преподаватели" name="action:SearchProfessors" class="btn btn-info" />
+            <input type="submit" value="Търси теми" name="action:SearchThesеs" class="btn btn-info" />
+        }
+</div>
+

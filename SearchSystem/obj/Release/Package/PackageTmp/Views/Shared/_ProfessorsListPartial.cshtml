@@ -1,0 +1,37 @@
+﻿<!--Use int Professor->ProfessorFromDepartment-->
+@model IEnumerable<SearchSystem.Entities.Professor>
+
+<table class="table">
+    <tr>
+        <th class="label-info th-small-info">Име</th>
+        <th class="label-info th-small-info">Фамилия</th>
+        <th class="label-info">Водени дисциплини</th>
+        <th class="label-info">Образование</th>
+        <th class="label-info">Професионални интереси</th>
+        <th class="label-info th-small-info">Описание</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subjects)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Education)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfesionalInterests)
+            </td>
+            <td>
+                @Html.ActionLink("Пълно описание", "Index", "Professor", new { currentId = item.ProfessorId, type = "Current" }, null)
+            </td>
+        </tr>
+    }
+</table>

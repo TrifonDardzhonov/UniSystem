@@ -1,0 +1,107 @@
+﻿@model SearchSystem.Entities.Thesis
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/UniversitySystem.css")
+
+
+
+<div style="padding:10px;" class="col-md-12">
+    @using (Html.BeginForm("SearchThesesByQueryString", "Thesis", FormMethod.Get))
+    {
+        <div class="col-md-12">
+            <label for="queryString">
+                Търсете теми по:
+                <i>име на темата, тип, сложност, описание, име на студент, име на рецензент или име на преподавател.</i>
+                <br />
+                Резултат:
+                <i>Всички теми които съдържат в себе си резултата от вашето търсене в някое от гореспоменатите полета.</i>
+            </label>
+        </div>
+        <div class="col-md-12">
+            <input style="max-width:100%; margin-bottom:5px;"
+                   class="col-md-12"
+                   type="text"
+                   id="queryString"
+                   name="queryString"
+                   placeholder="Въведете вашите критерии" />
+            <input type="submit"
+                   value="Намери"
+                   class="btn btn-info" />
+        </div>
+    }
+</div>
+<div class="col-md-12">
+    @Html.ActionLink("Предишна", "Index", "Thesis", new { currentId = Model.ThesisId - 1, type = "Previous" }, new { @class = "prev" })
+    @Html.ActionLink("Следваща", "Index", "Thesis", new { currentId = Model.ThesisId + 1, type = "Next" }, new { @class = "next pull-right" })<br />
+</div>
+<table class="table">
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.ThesisTitle)</th>
+        <td>@Html.DisplayFor(x => x.ThesisTitle)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.ThesisDescription)</th>
+        <td>@Html.DisplayFor(x => x.ThesisDescription)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.CreatedOn)</th>
+        <td>@Html.DisplayFor(x => x.CreatedOn)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.Professor.DepartmentName)</th>
+        <td>@Html.DisplayFor(x => x.Professor.DepartmentName)</td>
+    </tr>
+    <tr>
+        <th class="label-info">Преподавател</th>
+        <td>@Html.DisplayFor(x => x.Professor.FirstName) 
+            @Html.DisplayFor(x => x.Professor.LastName) - 
+            @Html.ActionLink("Пълно описание", "Index", "Professor", new { currentId = Model.Professor.ProfessorId, type = "Current" }, null)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.Type)</th>
+        <td>@Html.DisplayFor(x => x.Type)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.Complexity)</th>
+        <td>@Html.DisplayFor(x => x.Complexity)</td>
+    </tr>
+    @if (!Model.Status.Equals("Свободна")) 
+    { 
+        <tr>
+            <th class="label-danger">@Html.DisplayNameFor(x => x.Status)</th>
+            <td>@Html.DisplayFor(x => x.Status)</td>
+        </tr>
+        <tr>
+            <th class="label-default">@Html.DisplayNameFor(x => x.StudentName)</th>
+            <td>@Html.DisplayFor(x => x.StudentName)</td>
+        </tr>
+        <tr>
+            <th class="label-default">@Html.DisplayNameFor(x => x.StudentFakNo)</th>
+            <td>@Html.DisplayFor(x => x.StudentFakNo)</td>
+        </tr>
+        <tr>
+            <th class="label-default">@Html.DisplayNameFor(x => x.ReviewerName)</th>
+            <td>@Html.DisplayFor(x => x.ReviewerName)</td>
+        </tr>
+        if(Model.Status.Equals("Защитена"))
+        {
+            <tr>
+                <th class="label-default">@Html.DisplayNameFor(x => x.АwardedOn)</th>
+                <td>@Html.ValueFor(x => x.АwardedOn, "{0:dd MMMM yyyy}")</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <th class="label-success">@Html.DisplayNameFor(x => x.Status)</th>
+            <td>@Html.DisplayFor(x => x.Status)</td>
+        </tr>
+    }
+    <tr>
+        <th class="label-info">Рецензент</th>
+        <td>@Html.ActionLink("Намери", "SearchReviewers", "Thesis", new { thesisId = Model.ThesisId, professorId = Model.Professor.ProfessorId }, null)</td>
+    </tr>
+</table>
+
+

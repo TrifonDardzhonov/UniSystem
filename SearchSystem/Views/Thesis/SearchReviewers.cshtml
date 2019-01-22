@@ -1,0 +1,5 @@
+﻿@model IEnumerable<SearchSystem.Models.ProfessorRankModel>
+
+@Html.Partial("~/Views/Shared/_SearchProfessorsListPartial.cshtml", Model)
+
+@Html.ActionLink("Назад към темата", "Index", "Thesis", new { currentId = @ViewBag.ID, type = "Current" }, null)

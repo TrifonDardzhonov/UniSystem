@@ -1,0 +1,105 @@
+﻿@model SearchSystem.Models.BaseViewModels.ProfessorViewModel
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/UniversitySystem.css")
+
+@using (Html.BeginForm("EditProfessor", "ProfessorProfile", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ProfessorId)
+    <div><p class="editor-label required">Задължителни полета</p></div>
+    <table class="table">
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.FirstName)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.FirstName)
+                @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.LastName)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.LastName)
+                @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.Subjects)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Subjects)
+                @Html.EditorFor(x => x.Subjects, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.Education)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Education)
+                @Html.EditorFor(x => x.Education, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.Specialisations)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Specialisations)
+                @Html.EditorFor(x => x.Specialisations, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.ProfesionalInterests)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.ProfesionalInterests)
+                @Html.EditorFor(x => x.ProfesionalInterests, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.AwardsAndHonors)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.AwardsAndHonors)
+                @Html.EditorFor(x => x.AwardsAndHonors, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.Certifications)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Certifications)
+                @Html.EditorFor(x => x.Certifications, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.Patents)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Patents)
+                @Html.EditorFor(x => x.Patents, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.Publications)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Publications)
+                @Html.EditorFor(x => x.Publications, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.Email)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Email)
+                @Html.EditorFor(x => x.Email, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.OfficeHours)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.OfficeHours)
+                @Html.EditorFor(x => x.OfficeHours, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.Phone)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.Phone)
+                @Html.EditorFor(x => x.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+    </table>
+    
+    <input type="submit" value="Промени" class="btn btn-info" />
+}

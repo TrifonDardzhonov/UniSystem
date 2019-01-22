@@ -1,0 +1,22 @@
+﻿@model SearchSystem.Entities.Thesis
+
+<h4>Има същата тема в системата</h4>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(x => x.ThesisTitle)</th>
+        <td>@Html.DisplayFor(x => x.ThesisTitle)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(x => x.ThesisDescription)</th>
+        <td>@Html.DisplayFor(x => x.ThesisDescription)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(x => x.Status)</th>
+        <td>@Html.DisplayFor(x => x.Status)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(x => x.Professor.DepartmentName)</th>
+        <td>@Html.DisplayFor(x => x.Professor.DepartmentName)</td>
+    </tr>
+</table>

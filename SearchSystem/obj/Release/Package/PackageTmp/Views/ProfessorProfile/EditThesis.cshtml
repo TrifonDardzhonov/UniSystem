@@ -1,0 +1,76 @@
+﻿@model SearchSystem.Models.BaseViewModels.ThesisViewModel
+
+@Styles.Render("~/Content/UniversitySystem.css")
+
+@using (Html.BeginForm("EditThesis", "ProfessorProfile", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.ThesisId)
+    @Html.HiddenFor(x=>x.ProfessorId) 
+    
+    <div><p class="editor-label required">Задължителни полета</p></div>
+    <table class="table">
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.ThesisTitle)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.ThesisTitle)
+                @Html.EditorFor(x => x.ThesisTitle, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th><div class="editor-label required">@Html.LabelFor(x => x.ThesisDescription)</div></th>
+            <td>
+                @Html.ValidationMessageFor(x => x.ThesisDescription)
+                @Html.EditorFor(x => x.ThesisDescription, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.Type)</th>
+            <td>
+                @Html.DropDownListFor(x => x.Type, new SelectList(new[] { "Бакалавър", "Магистър" }), new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.Complexity)</th>
+            <td>
+                @Html.DropDownListFor(x => x.Complexity, new SelectList(new[] { "Средна", "Висока" }), new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(x => x.Status)</th>
+            <td>При оставяне на темата със статyс "Свободна", долните полета ще бъдат автоматично нулирани. 
+                @Html.DropDownListFor(x => x.Status, new SelectList(new[] { "Свободна", "Заета", "Защитена" }), new { @class = "form-control" })</td>
+        </tr>
+        <tr class="busy-thesis">
+            <th>@Html.LabelFor(x => x.StudentName)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.StudentName)
+                @Html.EditorFor(x => x.StudentName, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr class="busy-thesis">
+            <th>@Html.LabelFor(x => x.StudentFakNo)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.StudentFakNo)
+                @Html.EditorFor(x => x.StudentFakNo, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr class="busy-thesis">
+            <th>@Html.LabelFor(x => x.ReviewerName)</th>
+            <td>
+                @Html.ValidationMessageFor(x => x.ReviewerName)
+                @Html.EditorFor(x => x.ReviewerName, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr class="busy-thesis">
+            <th>@Html.LabelFor(x => x.АwardedOn)</th>
+            <td>
+                Моля променяйте, единствено ако темата е със статус "Защитена". Формат: mm-dd-yyyy.
+                @Html.ValidationMessageFor(x => x.АwardedOn)
+                @Html.EditorFor(x => x.АwardedOn, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+    </table>
+    
+    <input type="submit" value="Промени" class="btn btn-info" />
+}

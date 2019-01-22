@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SearchSystem.Models.ThesisRankModel>
+@if (!ViewBag.Error) 
+{
+
+    <table class="table">
+        <tr>
+            <th class="label-success">Заглавие</th>
+            <th class="label-success">Описание</th>
+            <th class="label-success th-small-info">Преподавател</th>
+            <th class="label-success th-small-info">Тип</th>
+            <th class="label-success th-small-info">Сложност</th>
+            <th class="label-success th-small-info">Статус</th>
+            <th class="label-success th-small-info">Подобие</th>
+            <th class="label-success th-small-info">Описание</th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td style="text-align:justify">
+                    @Html.DisplayFor(modelItem => item.ThesisTitle)
+                </td>
+                <td style="text-align:justify"
+                    id="description-@item.ThesisId">
+                    @(item.ThesisDescription.Length > 250 ? item.ThesisDescription.Substring(0, 250) + "..." : item.ThesisDescription)
+                    @Ajax.ActionLink("Виж пълно описание", "GetThesisDescription", "Professor",
+                                        new { thesisId = item.ThesisId },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "Get",
+                                            InsertionMode = InsertionMode.Replace,
+                                            UpdateTargetId = "description-" + item.ThesisId
+                                        })
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.ProfessorFullName)
+                </td>
+                <td class="text-center @(@ViewBag.typeFilterApplied == true ? "color-orange" : "color-black")">
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td class="text-center @(@ViewBag.complexityFilterApplied == true ? "color-orange" : "color-black")">
+                    @Html.DisplayFor(modelItem => item.Complexity)
+                </td>
+                <td class="text-center @(@ViewBag.statusFilterApplied == true ? "color-orange" : "color-black")">
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td class="text-center">
+                    <strong>@Html.DisplayFor(modelItem => item.Rank)%</strong>
+                </td>
+                <td>
+                    @Html.ActionLink("Към темата", "Index", "Thesis", new { currentId = item.ThesisId, type = "Current" }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@Html.ActionLink("Назад", "Index", "Search")

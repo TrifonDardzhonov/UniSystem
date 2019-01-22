@@ -1,0 +1,10 @@
+﻿@Styles.Render("~/Content/UniversitySystem.css")
+
+<div id="in-center">
+@using (Html.BeginForm("ShowKeywords", "Search", FormMethod.Post))
+{
+    <h3>Моля изберете катедра</h3>
+    @Html.Partial("~/Views/Shared/_DepartmentsPartial.cshtml")
+    <input type="submit" value="Избери катедра" class="btn btn-info" />
+}
+</div>

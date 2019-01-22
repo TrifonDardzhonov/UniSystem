@@ -1,0 +1,109 @@
+﻿@model SearchSystem.Entities.Professor
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/UniversitySystem.css")
+
+
+<div style="padding:10px;" class="col-md-12">
+    @using (Html.BeginForm("SearchProfessorsByQueryString", "Professor", FormMethod.Get))
+    {
+        <div class="col-md-12">
+            <label for="queryString">
+                Търсете преподавател по:
+                <i>име, фамилия, водени дисциплини, образование, професионални интереси, Email или приемно време. </i>
+                <br />
+                Резултат:
+                <i>Всички преподаватели които съдържат в себе си резултата от вашето търсене в някое от гореспоменатите полета.</i>
+            </label>
+        </div>
+        <div class="col-md-12">
+            <input style="max-width:100%; margin-bottom:5px;"
+                   class="col-md-12"
+                   type="text"
+                   id="queryString"
+                   name="queryString"
+                   placeholder="Въведете вашите критерии" />
+            <input type="submit"
+                   value="Намери"
+                   class="btn btn-info" />
+        </div>
+    }
+</div>
+<div class="col-md-12">
+    @Html.ActionLink("Предишен", "Index", "Professor", new { currentId = Model.ProfessorId - 1, type = "Previous" }, new { @class = "prev" })
+    @Html.ActionLink("Следващ", "Index", "Professor", new { currentId = Model.ProfessorId + 1, type = "Next" }, new { @class = "next pull-right" })<br />
+</div>
+<table class="table">
+    <tr>
+        <th class="label-info col-md-1">@Html.DisplayNameFor(x => x.FirstName)</th>
+        <td>@Html.DisplayFor(x => x.FirstName)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.LastName)</th>
+        <td>@Html.DisplayFor(x => x.LastName)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.DepartmentName)</th>
+        <td>@Html.DisplayFor(x => x.DepartmentName)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.Subjects)</th>
+        <td>@Html.DisplayFor(x => x.Subjects)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.Education)</th>
+        <td>@Html.DisplayFor(x => x.Education)</td>
+    </tr>
+    @if (!String.IsNullOrEmpty(Model.Specialisations))
+    {
+        <tr>
+            <th class="label-info">@Html.DisplayNameFor(x => x.Specialisations)</th>
+            <td>@Html.DisplayFor(x => x.Specialisations)</td>
+        </tr>
+    }
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.ProfesionalInterests)</th>
+        <td>@Html.DisplayFor(x => x.ProfesionalInterests)</td>
+    </tr>
+    @if (!String.IsNullOrEmpty(Model.AwardsAndHonors))
+    {
+        <tr>
+            <th class="label-info">@Html.DisplayNameFor(x => x.AwardsAndHonors)</th>
+            <td>@Html.DisplayFor(x => x.AwardsAndHonors)</td>
+        </tr>
+    }
+    @if (!String.IsNullOrEmpty(Model.Certifications))
+    {
+        <tr>
+            <th class="label-info">@Html.DisplayNameFor(x => x.Certifications)</th>
+            <td>@Html.DisplayFor(x => x.Certifications)</td>
+        </tr>
+    }
+    @if (!String.IsNullOrEmpty(Model.Patents))
+    {
+        <tr>
+            <th class="label-info">@Html.DisplayNameFor(x => x.Patents)</th>
+            <td>@Html.DisplayFor(x => x.Patents)</td>
+        </tr>
+    }
+    @if (!String.IsNullOrEmpty(Model.Publications))
+    {
+        <tr>
+            <th class="label-info">@Html.DisplayNameFor(x => x.Publications)</th>
+            <td>@Html.DisplayFor(x => x.Publications)</td>
+        </tr>
+    }
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.Email)</th>
+        <td>@Html.DisplayFor(x => x.Email)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.OfficeHours)</th>
+        <td>@Html.DisplayFor(x => x.OfficeHours)</td>
+    </tr>
+    <tr>
+        <th class="label-info">@Html.DisplayNameFor(x => x.Phone)</th>
+        <td>@Html.DisplayFor(x => x.Phone)</td>
+    </tr>
+</table>
+
+@Html.Partial("~/Views/Shared/_ThesesListPartial.cshtml", Model.Theses)

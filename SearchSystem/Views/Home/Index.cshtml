@@ -1,0 +1,56 @@
+﻿@model SearchSystem.Data.Models.Statistics.StatisticsViewModel
+<h3 style="font-family: Comic Sans; text-align:center;">Статистика</h3>
+<table class="table">
+    <tr>
+        <th class="label-info">Катедра</th>
+        <th class="label-info th-small-info">Преподаватели</th>
+        <th class="label-info th-small-info">Свободни теми</th>
+        <th class="label-info th-small-info">Заети теми</th>
+        <th class="label-info th-small-info">Защитени теми</th>
+    </tr>
+    @foreach (var item in Model.Departments)
+        {
+        <tr>
+            <td>@Html.DisplayFor(s => item.DepartmentName)</td>
+
+            <td>
+                Общо:
+                @Html.ActionLink(item.ProfessorsCount.ToString(), "ProfessorsFromDepartment", "Professor", new { departmentName = item.DepartmentName }, null)
+            </td>
+            <td>
+                <span class="col-md-12">
+                    Бакалаври:
+                    @Html.ActionLink(item.FreeBachelorThesesCount.ToString(), "ThesesFromDepartmentByQuery", "Thesis", new { departmentName = item.DepartmentName, status = "Свободна", type = "Бакалавър" }, null)
+                </span>
+                <span class="col-md-12">
+                    Магистри:
+                    @Html.ActionLink(item.FreeMasterThesesCount.ToString(), "ThesesFromDepartmentByQuery", "Thesis", new { departmentName = item.DepartmentName, status = "Свободна", type = "Магистър" }, null)
+                </span>
+            </td>
+            <td>
+                <span class="col-md-12">
+                    Бакалаври:
+                    @Html.ActionLink(item.BusyBachelorThesesCount.ToString(), "ThesesFromDepartmentByQuery", "Thesis", new { departmentName = item.DepartmentName, status = "Заета", type = "Бакалавър" }, null)
+                </span>
+                <span class="col-md-12">
+                    Магистри:
+                    @Html.ActionLink(item.BusyMasterThesesCount.ToString(), "ThesesFromDepartmentByQuery", "Thesis", new { departmentName = item.DepartmentName, status = "Заета", type = "Магистър" }, null)
+                </span>
+            </td>
+            <td>
+                <span class="col-md-12">
+                    Бакалаври:
+                    @Html.ActionLink(item.AwardedBachelorThesesCount.ToString(), "ThesesFromDepartmentByQuery", "Thesis", new { departmentName = item.DepartmentName, status = "Защитена", type = "Бакалавър" }, null)
+                </span>
+                <span class="col-md-12">
+                    Магистри:
+                    @Html.ActionLink(item.AwardedMasterThesesCount.ToString(), "ThesesFromDepartmentByQuery", "Thesis", new { departmentName = item.DepartmentName, status = "Защитена", type = "Магистър" }, null)
+                </span>
+            </td>
+        </tr>
+        }
+</table>
+
+<script>
+    function reload() { windows.location.reload(); }
+</script>

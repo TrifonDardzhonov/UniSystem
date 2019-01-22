@@ -1,0 +1,10 @@
+﻿@using (Html.BeginForm("RegisterProfessor", "CustomRegistration", FormMethod.Get))
+{ 
+    <h3 style="color:orange">Регистрация: Стъпка 2</h3>
+    <div id="in-center">
+        <h3>Моля продължете с регистрацията</h3>
+        <h3>Моля изберете катедра</h3>
+        @Html.Partial("~/Views/Shared/_DepartmentsPartial.cshtml")
+        <input type="submit" value="Избери катедра" class="btn btn-info" />
+    </div>
+}

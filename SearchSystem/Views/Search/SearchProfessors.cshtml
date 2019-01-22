@@ -1,0 +1,6 @@
+﻿@model IEnumerable<SearchSystem.Models.ProfessorRankModel>
+@if (!ViewBag.Error)
+{
+    @Html.Partial("~/Views/Shared/_SearchProfessorsListPartial.cshtml", Model)
+}
+@Html.ActionLink("Назад", "Index", "Search")

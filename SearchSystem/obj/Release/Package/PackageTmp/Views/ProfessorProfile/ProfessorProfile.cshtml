@@ -1,0 +1,48 @@
+﻿@model ICollection<SearchSystem.Entities.Thesis>
+
+<span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Нова тема", "CreateThesis", "ProfessorProfile") <br />
+<span class="glyphicon glyphicon-file"></span>@Html.ActionLink("Редактирай личния профил (описание)", "EditProfessor", "ProfessorProfile") <br/>
+<span class="glyphicon glyphicon-wrench"></span>@Html.ActionLink("Редактирай личния профил (ключови думи)", "EditProfessorKeywords", "ProfessorProfile")
+
+<table class="table">
+    <tr>
+        <th class="label-primary">Име на темата</th>
+        <th class="label-info">Описание</th>
+        <th class="label-warning th-small-info">Създадена</th>
+        <th class="label-default th-small-info">Заетост</th>
+        <th class="label-danger th-small-info">Опции</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThesisTitle)
+            </td>
+            <td id="description-@item.ThesisId">
+                @(item.ThesisDescription.Length > 250 ? item.ThesisDescription.Substring(0, 250) + "..." : item.ThesisDescription)
+                @Ajax.ActionLink("Виж пълно описание", "GetThesisDescription", "Professor",
+                                        new { thesisId = item.ThesisId },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "Get",
+                                            InsertionMode = InsertionMode.Replace,
+                                            UpdateTargetId = "description-" + item.ThesisId
+                                        })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-remove-circle"></span>
+                @Html.ActionLink("Изтрии", "DeleteThesis", "ProfessorProfile", new { thesisid = item.ThesisId, professorid = item.ProfessorId }, null)<br />
+                <span class="glyphicon glyphicon-file"></span>
+                @Html.ActionLink("Описание", "EditThesis", "ProfessorProfile", new { thesisid = item.ThesisId, professorid = item.ProfessorId }, null)<br/>
+                <span class="glyphicon glyphicon-wrench"></span>
+                @Html.ActionLink("Кл. думи", "EditThesisKeywords", "ProfessorProfile", new { thesisid = item.ThesisId, professorid = item.ProfessorId }, null)
+            </td>
+        </tr>
+}
+</table>
